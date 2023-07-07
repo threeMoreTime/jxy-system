@@ -19,6 +19,7 @@
 
 <style lang="scss" scoped>
 .top {
+    z-index: 1;
     position: fixed;
     display: flex;
     justify-content: center;

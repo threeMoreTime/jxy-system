@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <Header/>
-      <div id="content">
+      <div class="content">
         <!-- 路由展示位置 -->
         <router-view></router-view>
       </div>
@@ -21,10 +21,11 @@
   flex-direction: column;
   align-items: center;
   // 轮播图容器
-  #content{
+  .content{
     // 避免遮挡Header组件
     margin-top: 70px;
-  min-width: 1200px;
+    margin-bottom: 70px;
+  width: 1200px;
   min-height: 700px;
 }
 
