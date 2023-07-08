@@ -1,34 +1,33 @@
 <template>
   <div class="container">
-      <Header/>
-      <div class="content">
-        <!-- 路由展示位置 -->
-        <router-view></router-view>
-      </div>
-      
-      <Floor/>
+    <Header />
+    <div class="content">
+      <!-- 路由展示位置 -->
+      <router-view></router-view>
+    </div>
+
+    <Floor />
   </div>
 </template>
 
 <script setup lang="ts">
-
 </script>
 
 <style lang="scss" scoped>
-.container{
+.container {
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
   // 轮播图容器
-  .content{
+  .content {
     // 避免遮挡Header组件
     margin-top: 70px;
     margin-bottom: 70px;
-  width: 1200px;
-  min-height: 700px;
-}
+    width: 1200px;
+    min-height: 700px;
+  }
 
 }
-
 </style>

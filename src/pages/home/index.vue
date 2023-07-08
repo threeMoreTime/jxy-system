@@ -12,12 +12,10 @@
                 <div class="hospitalList">
                     <div class="item" v-for="item in 10" :key="item">
                         <Card />
-                      
-                        
                     </div>
-                      <!-- 分页器 -->
-                        
-                      <el-pagination background layout="prev, pager, next" :total="1000" />
+                    <!-- 分页器 -->
+                    <el-pagination layout="total,sizes,prev,pager,next,jumper" :total="list.length"
+                        @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" />
                 </div>
             </el-col>
             <el-col :span='4'>
@@ -28,10 +26,30 @@
 </template>
 
 <script setup lang="ts">
+// 引入子组件
 import Carousel from './carouselmap/index.vue'
 import Search from './search/index.vue'
 import Selectlist from './selectlist/index.vue'
 import Card from './card/index.vue'
+// 引入请求接口
+import { reqHospital } from '@/api/home'
+import { onMounted, ref } from 'vue';
+// 引入element库
+import { ElMessage } from "element-plus";
+
+// 分页器页码
+let pageNo = ref<number>(1)
+// 一页几条数据
+let pageSize = ref<number>(10)
+
+onMounted(() => {
+    getHospitalInfo();
+})
+
+const getHospitalInfo = async () => {
+    let result: any = await reqHospital(pageNo.value, pageSize.value);
+    console.log('resulr', result);
+}
 </script>
 
 <style lang="scss" scoped>
