@@ -14,8 +14,6 @@
                         <Card />
                     </div>
                     <!-- 分页器 -->
-                    <el-pagination layout="total,sizes,prev,pager,next,jumper" :total="list.length"
-                        @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" />
                 </div>
             </el-col>
             <el-col :span='4'>
