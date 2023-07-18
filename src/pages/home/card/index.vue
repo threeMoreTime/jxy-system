@@ -20,6 +20,12 @@
 </template>
 
 <script setup lang="ts">
+// onMounted(() => {
+//   console.log(hospitaInfo);
+  
+// })
+// 接收父组件中的医院数据
+defineProps(['hospitaInfo']);
 
 </script>
 

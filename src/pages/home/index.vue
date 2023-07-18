@@ -10,9 +10,9 @@
                 <Selectlist />
                 <!-- 医院信息卡片 -->
                 <div class="hospitalList">
-                    <div class="item" v-for="item in 10" :key="item">
-                        <Card />
-                    </div>
+
+                    <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
+
                     <!-- 分页器 -->
                 </div>
             </el-col>
@@ -36,17 +36,29 @@ import { onMounted, ref } from 'vue';
 import { ElMessage } from "element-plus";
 
 // 分页器页码
-let pageNo = ref<number>(1)
+let pageNo = ref<number>(1);
 // 一页几条数据
-let pageSize = ref<number>(10)
-
+let pageSize = ref<number>(10);
+// 存放医院数据的空数组
+let hospitalArr = ref([]);
+// 医院的个数
+let totalNum = ref(0);
 onMounted(() => {
     getHospitalInfo();
 })
 
 const getHospitalInfo = async () => {
     let result: any = await reqHospital(pageNo.value, pageSize.value);
-    console.log('resulr', result);
+    if (result.code == 200) {
+        // 医院的全部数据
+        pageSize.value = result.data.content;
+        // 医院的个数
+        totalNum.value = result.data.totalElements;
+
+    } else {
+        return Promise.reject(new Error('error'))
+    }
+
 }
 </script>
 
