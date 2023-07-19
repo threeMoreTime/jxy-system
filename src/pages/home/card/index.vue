@@ -2,38 +2,37 @@
   <el-card shadow="hover" class="box-card">
     <div class="container">
       <div class="left">
-        <div class="name">北京人民医院</div>
+        <div class="name">{{ hospitaInfo.hosname }}</div>
         <div class="tip">
-          <div class="level"><el-icon>
+          <div class="level">
+            <el-icon>
               <Histogram />
-            </el-icon><span>三级甲等</span> </div>
-          <div class="time"><el-icon><Timer /></el-icon>
-          <span>2023-7-7</span> </div>
+            </el-icon><span>{{ hospitaInfo.param.hostypeString }}</span>
+          </div>
+          <div class="time">
+            <el-icon>
+              <Timer />
+            </el-icon>
+            <span>{{ hospitaInfo.bookingRule.releaseTime }}</span>
+          </div>
         </div>
       </div>
       <div class="right">
-        <img src="../../../assets//images/logo.png" alt="">
+        <!--  -->
+        <img :src="`data:imagejpeg;base64,${hospitaInfo.logoData}`" alt="医院logo" />
       </div>
-
     </div>
   </el-card>
 </template>
 
 <script setup lang="ts">
-// onMounted(() => {
-//   console.log(hospitaInfo);
-  
-// })
-// 接收父组件中的医院数据
-defineProps(['hospitaInfo']);
+import { defineProps, onMounted } from "vue";
+defineProps(["hospitaInfo"]);
 
+onMounted(() => { });
 </script>
-
 <style lang="scss" scoped>
-
-
 .container {
- 
   display: flex;
   justify-content: space-between;
 
@@ -45,17 +44,21 @@ defineProps(['hospitaInfo']);
       margin-top: 50px;
       display: flex;
       justify-content: space-between;
-      span{
+
+      span {
         margin-left: 5px;
       }
     }
-
   }
 
   .right {
     img {
       height: 80px;
       width: 80px;
+      border-radius: 40px;
+      margin-left: 12px;
+      transition: all .2s linear;
     }
   }
-}</style>
+}
+</style>
