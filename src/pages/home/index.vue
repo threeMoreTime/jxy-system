@@ -10,9 +10,7 @@
                 <Selectlist />
                 <!-- 医院信息卡片 -->
                 <div class="hospitalList">
-
                     <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
-
                     <!-- 分页器 -->
                     <el-pagination @size-change="handleSizeChange" @current-change="currentChange" :current-page="pageNo"
                         :page-sizes="[2, 4, 6, 8]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
@@ -34,25 +32,27 @@ import Search from './search/index.vue'
 import Selectlist from './selectlist/index.vue'
 import Card from './card/index.vue'
 // 引入请求接口
-import { reqHospital } from '@/api/home'
+import { reqHospital,reqExportData } from '@/api/home'
 import { onMounted, ref } from 'vue';
 // 引入element库
 import { ElMessage } from "element-plus";
-
+// 引入type规范
+import {Content,HospTailResponseData} from '@/api/home/type'
 // 分页器页码
 let pageNo = ref<number>(1);
 // 一页几条数据
 let pageSize = ref<number>(4);
 // 存放医院数据的空数组
-let hospitalArr = ref([]);
+let hospitalArr = ref<Content>([]);
 // 医院的个数
-let totalNum = ref(0);
+let totalNum = ref<number>(0);
 onMounted(() => {
     getHospitalInfo();
+    getExportData();
 })
 // 发送获取医院信息请求
 const getHospitalInfo = async () => {
-    let result: any = await reqHospital(pageNo.value, pageSize.value);
+    let result: HospTailResponseData = await reqHospital(pageNo.value, pageSize.value);
     if (result.code == 200) {
         // 医院的全部数据
         hospitalArr.value = result.data.content;
@@ -61,12 +61,20 @@ const getHospitalInfo = async () => {
     } else {
         return Promise.reject(new Error('error'))
     }
-
 }
+
+//获取数据字典数据
+const getExportData = async ()=>{
+    let result = await reqExportData();
+    console.log('result',result);
+    
+}
+// 修改一页多少数据重新发送请求
 const handleSizeChange = (size: number) => {
     pageSize.value = size;
     getHospitalInfo();
 }
+// 翻页重新获取列表数据
 const currentChange = (page: number) => {
     pageNo.value = page;
     getHospitalInfo();

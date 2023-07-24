@@ -89,4 +89,17 @@ export interface BookingRule {
   rule: string[]; // 规则列表
 }
 
+//医院或地区的等级数据的ts类型
+export interface HospitalLevelAndRegion{
+  createTime: string
+  dictCode: string
+  hasChildren: boolean
+  id: number
+  isDeleted: number
+  name: string
+  param: Param
+  parentId: number
+  updateTime: string
+  value: string
+}
 
