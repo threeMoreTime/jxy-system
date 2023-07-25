@@ -97,9 +97,19 @@ export interface HospitalLevelAndRegion{
   id: number
   isDeleted: number
   name: string
-  param: Param
+  param: {}
   parentId: number
   updateTime: string
   value: string
+}
+export type HospitalLevelAndRegionArr = HospitalLevelAndRegion[];
+//获取等级或医院地区接口返回数据类型
+export interface HospitalLevelAndRegionResponseData extends ResponseData {
+    data: HospitalLevelAndRegionArr
+}
+
+
+export interface HospitalInfo extends ResponseData {
+    data: Content
 }
 

@@ -5,14 +5,16 @@ enum API {
   // 获取现在有的医院数据的接口路径
   HOSPITAL_URL = '/hosp/hospital/',
   // 数据字典接口路径
-  DICT_CONTROLLER= '/admin/cmn/dict/findByDictCode/',
+  HOSPITALLEVElANDREGION_URL= '/cmn/dict/findByDictCode/',
 }
 
 // 获取分页列表信息
 export const reqHospital = (page: number, limit: number) => request.get<any, HospTailResponseData>(API.HOSPITAL_URL + `${page}/${limit}`);
 
 //获取数据字典数据
-export const reqExportData = (dictCode:String) =>request.get<any>(API.DICT_CONTROLLER+dictCode)
+export const reqExportData = (dictCode:string) =>request.get<any>(API.HOSPITALLEVElANDREGION_URL + dictCode);
+//获取医院的等级或者获取医院地区的数据
+// export const reqHospitalLevelAndRegion = (dictCode: string) => request.get<any, HospitalLevelAndRegionResponseData>(API.HOSPITALLEVElANDREGION_URL + dictCode);
 
 // 获取排班数据
 export const findScheduleList = (hoscode: string, depcode: string, workDate: string) => request.get<any>(API.HOSPITAL_URL+`/auth/findScheduleList/${hoscode}/${depcode}/${workDate}`);

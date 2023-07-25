@@ -65,7 +65,7 @@ const getHospitalInfo = async () => {
 
 //获取数据字典数据
 const getExportData = async ()=>{
-    let result = await reqExportData();
+    let result = await reqExportData('HosType');
     console.log('result',result);
     
 }
