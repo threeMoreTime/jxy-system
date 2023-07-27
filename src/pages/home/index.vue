@@ -7,7 +7,7 @@
         <!-- 医院信息列表 -->
         <el-row gutter="20">
             <el-col :span="20">
-                <Selectlist />
+                <Selectlist :gradeList="hospitalGrade" />
                 <!-- 医院信息卡片 -->
                 <div class="hospitalList">
                     <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
@@ -37,7 +37,7 @@ import { onMounted, ref } from 'vue';
 // 引入element库
 import { ElMessage } from "element-plus";
 // 引入type规范
-import {Content,HospTailResponseData} from '@/api/home/type'
+import {Content,HospTailResponseData,HospitalLevelAndRegionArr,HospitalLevelAndRegionResponseData} from '@/api/home/type'
 // 分页器页码
 let pageNo = ref<number>(1);
 // 一页几条数据
@@ -46,6 +46,8 @@ let pageSize = ref<number>(4);
 let hospitalArr = ref<Content>([]);
 // 医院的个数
 let totalNum = ref<number>(0);
+//  医院等级数据
+let hospitalGrade = ref<HospitalLevelAndRegionArr>([])
 onMounted(() => {
     getHospitalInfo();
     getExportData();
@@ -65,9 +67,17 @@ const getHospitalInfo = async () => {
 
 //获取数据字典数据
 const getExportData = async ()=>{
-    let result = await reqExportData('HosType');
-    console.log('result',result);
-    
+    let result:HospitalLevelAndRegionResponseData = await reqExportData('HosType');
+       try {
+        if (result.code == 200) {
+    hospitalGrade.value = result.data
+   }  else {
+        return Promise.reject(new Error('error'))
+    }
+    } catch (error) {
+        return Promise.reject(error)
+    }
+   
 }
 // 修改一页多少数据重新发送请求
 const handleSizeChange = (size: number) => {

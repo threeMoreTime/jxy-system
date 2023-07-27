@@ -1,19 +1,6 @@
 <template>
-    <div class="listData">
-        <h5 class="title">医院</h5>
-        <!-- 第二行医院等级 -->
-        <div class="hospitalList">
-            <div class="left">等级:</div>
-            <ul>
-                <li @click="changeactive('')" :class="{active:changeValue==''}">全部</li>
-               
-               <li @click="changeactive(level.value)" :class="{active:changeValue==level.value}" v-for="level in gradeList" :key="level.value">
-                {{ level.name }}
-               </li>
-            </ul>
-        </div>
-        <!-- 医院地区信息 -->
-        <div class="region">
+   <!-- 医院地区信息 -->
+   <div class="region">
             <div class="left">地区:</div>
             <ul>
                 <li class="active">全部</li>
@@ -42,7 +29,6 @@
                 <li>东城区</li>
             </ul>
         </div>
-    </div>
 </template>
 
 <script setup lang="ts">
@@ -61,28 +47,27 @@ const changeactive = (value: string) => {
 </script>
 
 <style lang="scss" scoped>
-.listData {
-    color: #999;
+ // 地区信息列表
+    .region {
 
-    .title {
-        margin: 20px 0px;
-    }
-
-    // 第二行 等级
-    .hospitalList {
-        margin-top: 10px;
+        margin-top: 20px;
         display: flex;
 
-        ul {
+        .left {
             display: flex;
-            justify-content: center;
+        }
+
+        ul {
+            width: 900px;
+            display: flex;
+            flex-wrap: wrap;
 
             .active {
                 color: aquamarine;
             }
 
             li {
-                margin: 0 10px;
+                margin: 0px 10px 10px;
                 cursor: pointer;
             }
 
@@ -92,6 +77,4 @@ const changeactive = (value: string) => {
 
         }
     }
-
-   
-}</style>
+</style>
