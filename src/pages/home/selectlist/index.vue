@@ -12,36 +12,6 @@
                </li>
             </ul>
         </div>
-        <!-- 医院地区信息 -->
-        <div class="region">
-            <div class="left">地区:</div>
-            <ul>
-                <li class="active">全部</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-                <li>东城区</li>
-            </ul>
-        </div>
     </div>
 </template>
 

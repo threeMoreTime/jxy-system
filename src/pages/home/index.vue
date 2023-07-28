@@ -7,7 +7,10 @@
         <!-- 医院信息列表 -->
         <el-row gutter="20">
             <el-col :span="20">
+                <!-- 等级列表 -->
                 <Selectlist :gradeList="hospitalGrade" />
+                <!-- 地区列表 -->
+                <region :placeList="hospitalPlace" />
                 <!-- 医院信息卡片 -->
                 <div class="hospitalList">
                     <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
@@ -31,13 +34,14 @@ import Carousel from './carouselmap/index.vue'
 import Search from './search/index.vue'
 import Selectlist from './selectlist/index.vue'
 import Card from './card/index.vue'
+import region from './region/index.vue'
 // 引入请求接口
-import { reqHospital,reqExportData } from '@/api/home'
+import { reqHospital, reqExportData } from '@/api/home'
 import { onMounted, ref } from 'vue';
 // 引入element库
 import { ElMessage } from "element-plus";
 // 引入type规范
-import {Content,HospTailResponseData,HospitalLevelAndRegionArr,HospitalLevelAndRegionResponseData} from '@/api/home/type'
+import { Content, HospTailResponseData, HospitalLevelAndRegionArr, HospitalLevelAndRegionResponseData } from '@/api/home/type'
 // 分页器页码
 let pageNo = ref<number>(1);
 // 一页几条数据
@@ -48,6 +52,8 @@ let hospitalArr = ref<Content>([]);
 let totalNum = ref<number>(0);
 //  医院等级数据
 let hospitalGrade = ref<HospitalLevelAndRegionArr>([])
+// 医院地区数据
+let hospitalPlace = ref<HospitalLevelAndRegionArr>([])
 onMounted(() => {
     getHospitalInfo();
     getExportData();
@@ -66,18 +72,27 @@ const getHospitalInfo = async () => {
 }
 
 //获取数据字典数据
-const getExportData = async ()=>{
-    let result:HospitalLevelAndRegionResponseData = await reqExportData('HosType');
-       try {
-        if (result.code == 200) {
-    hospitalGrade.value = result.data
-   }  else {
-        return Promise.reject(new Error('error'))
-    }
+const getExportData = async () => {
+    let res: HospitalLevelAndRegionResponseData = await reqExportData('HosType');
+    try {
+        if (res.code == 200) {
+            hospitalGrade.value = res.data
+        } else {
+            return Promise.reject(new Error('error'))
+        }
     } catch (error) {
         return Promise.reject(error)
     }
-   
+    let result: HospitalLevelAndRegionResponseData = await reqExportData('beijin');
+    try {
+        if (result.code == 200) {
+            hospitalPlace.value = result.data
+        } else {
+            return Promise.reject(new Error('error'))
+        }
+    } catch (error) {
+        return Promise.reject(error)
+    }
 }
 // 修改一页多少数据重新发送请求
 const handleSizeChange = (size: number) => {
