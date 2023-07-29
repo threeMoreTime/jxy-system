@@ -21,7 +21,7 @@ request.interceptors.response.use(
   },
   (error) => {
     //处理http网络错误
-    let status = error.response.status;
+    let status = error.response.status?error.response.status:'服务器错误';
     switch (status) {
       case 404:
         //错误提示信息

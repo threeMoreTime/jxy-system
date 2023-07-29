@@ -50,17 +50,21 @@ let pageSize = ref<number>(4);
 let hospitalArr = ref<Content>([]);
 // 医院的个数
 let totalNum = ref<number>(0);
+// 等级参数和
+let hostype =ref<string>((""))
+let districtCode =ref<string>((""))
 //  医院等级数据
 let hospitalGrade = ref<HospitalLevelAndRegionArr>([])
 // 医院地区数据
 let hospitalPlace = ref<HospitalLevelAndRegionArr>([])
+
 onMounted(() => {
     getHospitalInfo();
     getExportData();
 })
 // 发送获取医院信息请求
 const getHospitalInfo = async () => {
-    let result: HospTailResponseData = await reqHospital(pageNo.value, pageSize.value);
+    let result: HospTailResponseData = await reqHospital(pageNo.value, pageSize.value,hostype.value,districtCode.value);
     if (result.code == 200) {
         // 医院的全部数据
         hospitalArr.value = result.data.content;

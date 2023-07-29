@@ -9,8 +9,7 @@ enum API {
 }
 
 // 获取分页列表信息
-export const reqHospital = (page: number, limit: number) => request.get<any, HospTailResponseData>(API.HOSPITAL_URL + `${page}/${limit}`);
-
+export const reqHospital = (page: number, limit: number,hostype:string,districtCode:string) => request.get<any, HospTailResponseData>(API.HOSPITAL_URL + `${page}/${limit}?hostype=${hostype}&districtCode=${districtCode}`);
 //获取数据字典数据
 export const reqExportData = (dictCode:string) =>request.get<any>(API.HOSPITALLEVElANDREGION_URL + dictCode);
 //获取医院的等级或者获取医院地区的数据
