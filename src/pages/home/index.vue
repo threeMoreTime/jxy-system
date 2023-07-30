@@ -8,9 +8,9 @@
         <el-row gutter="20">
             <el-col :span="20">
                 <!-- 等级列表 -->
-                <Selectlist :gradeList="hospitalGrade" />
+                <Selectlist @getLevel="getLevel" />
                 <!-- 地区列表 -->
-                <region :placeList="hospitalPlace" />
+                <region @getRegion="getRegion" />
                 <!-- 医院信息卡片 -->
                 <div class="hospitalList">
                     <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
@@ -41,7 +41,7 @@ import { onMounted, ref } from 'vue';
 // 引入element库
 import { ElMessage } from "element-plus";
 // 引入type规范
-import { Content, HospTailResponseData, HospitalLevelAndRegionArr, HospitalLevelAndRegionResponseData } from '@/api/home/type'
+import { Content, HospTailResponseData, HospitalLevelAndRegionArr } from '@/api/home/type'
 // 分页器页码
 let pageNo = ref<number>(1);
 // 一页几条数据
@@ -50,21 +50,17 @@ let pageSize = ref<number>(4);
 let hospitalArr = ref<Content>([]);
 // 医院的个数
 let totalNum = ref<number>(0);
-// 等级参数和
-let hostype =ref<string>((""))
-let districtCode =ref<string>((""))
-//  医院等级数据
-let hospitalGrade = ref<HospitalLevelAndRegionArr>([])
-// 医院地区数据
-let hospitalPlace = ref<HospitalLevelAndRegionArr>([])
+// 等级参数和地区参数
+let hostype = ref<string>((""))
+let districtCode = ref<string>((""))
 
 onMounted(() => {
     getHospitalInfo();
-    getExportData();
 })
+
 // 发送获取医院信息请求
 const getHospitalInfo = async () => {
-    let result: HospTailResponseData = await reqHospital(pageNo.value, pageSize.value,hostype.value,districtCode.value);
+    let result: HospTailResponseData = await reqHospital(pageNo.value, pageSize.value, hostype.value, districtCode.value);
     if (result.code == 200) {
         // 医院的全部数据
         hospitalArr.value = result.data.content;
@@ -75,37 +71,29 @@ const getHospitalInfo = async () => {
     }
 }
 
-//获取数据字典数据
-const getExportData = async () => {
-    let res: HospitalLevelAndRegionResponseData = await reqExportData('HosType');
-    try {
-        if (res.code == 200) {
-            hospitalGrade.value = res.data
-        } else {
-            return Promise.reject(new Error('error'))
-        }
-    } catch (error) {
-        return Promise.reject(error)
-    }
-    let result: HospitalLevelAndRegionResponseData = await reqExportData('beijin');
-    try {
-        if (result.code == 200) {
-            hospitalPlace.value = result.data
-        } else {
-            return Promise.reject(new Error('error'))
-        }
-    } catch (error) {
-        return Promise.reject(error)
-    }
-}
 // 修改一页多少数据重新发送请求
 const handleSizeChange = (size: number) => {
     pageSize.value = size;
     getHospitalInfo();
 }
+
 // 翻页重新获取列表数据
 const currentChange = (page: number) => {
     pageNo.value = page;
+    getHospitalInfo();
+}
+
+// 获取selectlist子组件传递的参数
+const getLevel = (level: string) => {
+    // 修改等级参数后重新发送请求
+    hostype.value = level;
+    getHospitalInfo();
+}
+
+// 获取region子组件传递的参数
+const getRegion = (Region: string) => {
+    // 修改地区参数后重新发送请求
+    districtCode.value = Region;
     getHospitalInfo();
 }
 </script>
