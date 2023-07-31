@@ -5,8 +5,8 @@
         <div class="hospitalList">
             <div class="left">等级:</div>
             <ul>
-                <li @click="changeactive('')" :class="{ active: changeValue == '' }">全部</li>
-                <li @click="changeactive(level.value)" :class="{ active: changeValue == level.value }"
+                <li @click="changeActive('')" :class="{ active: changeValue == '' }">全部</li>
+                <li @click="changeActive(level.value)" :class="{ active: changeValue == level.value }"
                     v-for="level in hospitalGrade" :key="level.value">
                     {{ level.name }}
                 </li>
@@ -45,7 +45,7 @@ const getExportData = async () => {
 
 const changeValue = ref('');
 
-const changeactive = (value: string) => {
+const changeActive = (value: string) => {
     changeValue.value = value;
     // 给父组件传递等级参数
     $emit('getLevel', value)

@@ -3,8 +3,8 @@
     <div class="region">
         <div class="left">地区:</div>
         <ul>
-            <li :class="{ active: changeValue == '' }">全部</li>
-            <li @click="changeactive(item.value)" :class="{ active: changeValue == item.value }"
+            <li @click="changeActive('')" :class="{ active: changeValue == '' }">全部</li>
+            <li @click="changeActive(item.value)" :class="{ active: changeValue == item.value }"
                 v-for="(item, index) in hospitalPlace" :key="item.id">{{ item.name }}</li>
         </ul>
     </div>
@@ -23,7 +23,7 @@ onMounted(() => {
 let hospitalPlace = ref<HospitalLevelAndRegionArr>([])
 // 修改高亮的参数
 const changeValue = ref('');
-const changeactive = (value: string) => {
+const changeActive = (value: string) => {
     changeValue.value = value;
     $emit('getRegion', value)
 };
