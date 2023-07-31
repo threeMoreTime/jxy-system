@@ -5,7 +5,10 @@
 </template>
 
 <script setup lang="ts">
-
+import { onMounted, ref } from 'vue';
+onMounted(() => {
+    console.log('我是hospital的挂载');
+})
 </script>
 
 <style scoped>
