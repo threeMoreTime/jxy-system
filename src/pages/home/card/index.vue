@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover" class="box-card">
+  <el-card @click="goDetail" shadow="hover" class="box-card">
     <div class="container">
       <div class="left">
         <div class="name">{{ hospitaInfo.hosname }}</div>
@@ -27,12 +27,19 @@
 
 <script setup lang="ts">
 import { defineProps, onMounted } from "vue";
+import { useRouter } from "vue-router";
 defineProps(["hospitaInfo"]);
-
+// 初始化路由 创建路由对象
+let $router = useRouter();
+// 点击卡片信息的回调
+const goDetail = () =>{
+  $router.push({path:'/hospital'})
+}
 onMounted(() => { });
 </script>
 <style lang="scss" scoped>
 .container {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
 
