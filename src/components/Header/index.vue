@@ -1,7 +1,7 @@
 <template>
     <div class="top">
         <div id="content">
-            <div class="top-left">
+            <div class="top-left" @click="goHome">
                 <img src='../../assets//images//logo.png' alt="">
                 <p>捷信源 预约挂号统一平台</p>
             </div>
@@ -14,6 +14,12 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+const $router = useRouter();
+// 返回首页
+const goHome = () =>{
+    $router.push({path:'/home'});
+}
 
 </script>
 
@@ -36,6 +42,7 @@
 
         /* 顶部的左侧 */
         .top-left {
+            cursor: pointer;
             display: flex;
             /* 两边对对齐 */
             justify-content: space-between;
