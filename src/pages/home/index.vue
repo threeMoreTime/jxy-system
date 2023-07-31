@@ -12,7 +12,7 @@
                 <!-- 地区列表 -->
                 <region @getRegion="getRegion" />
                 <!-- 医院信息卡片 -->
-                <div class="hospitalList">
+                <div class="hospitalList" v-if="hospitalArr.length!==0">
                     <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
                     <!-- 分页器 -->
                     <el-pagination @size-change="handleSizeChange" @current-change="currentChange" :current-page="pageNo"
@@ -20,6 +20,7 @@
                         :total="totalNum">
                     </el-pagination>
                 </div>
+                <el-empty v-else description="无符合条件医院信息"></el-empty>
             </el-col>
             <el-col :span='4'>
                 右边的内容
