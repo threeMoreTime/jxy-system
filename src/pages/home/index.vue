@@ -16,14 +16,14 @@
                     <Card class="item" v-for="(item, index) in hospitalArr" :key="index" :hospitaInfo="item" />
                     <!-- 分页器 -->
                     <el-pagination @size-change="handleSizeChange" @current-change="currentChange" :current-page="pageNo"
-                        :page-sizes="[2, 4, 6, 8]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+                        :page-sizes="[2, 4, 6, 10]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
                         :total="totalNum">
                     </el-pagination>
                 </div>
                 <el-empty v-else description="无符合条件医院信息"></el-empty>
             </el-col>
             <el-col :span='4'>
-                右边的内容
+                <Right />
             </el-col>
         </el-row>
     </div>
@@ -36,6 +36,7 @@ import Search from './search/index.vue'
 import Selectlist from './selectlist/index.vue'
 import Card from './card/index.vue'
 import region from './region/index.vue'
+import Right from './right/index.vue'
 // 引入请求接口
 import { reqHospital, reqExportData } from '@/api/home'
 import { onMounted, ref } from 'vue';
