@@ -65,24 +65,25 @@
         </span>
       </div>
       <ul>
-        <li>神经内科</li>
-        <li>消化内科</li>
-        <li>口腔科</li>
-        <li>耳鼻喉科</li>
-        <li>神经内科</li>
-        <li>消化内科</li>
-        <li>口腔科</li>
-        <li>耳鼻喉科</li>
-        <li>口腔科</li>
-        <li>耳鼻喉科</li>
+        <span>神经内科</span>
+        <span>消化内科</span>
+        <span>耳鼻喉科</span>
+        <span>神经内科</span>
+        <span>消化内科</span>
+        <span>耳鼻喉科</span>
+        <span>消化内科</span>
+        <span>耳鼻喉科</span>
       </ul>
     </div>
-    <div class="middle">中间</div>
+    <div class="middle">
+      <div></div>
+      <div></div>
+    </div>
     <div class="bottom">底部</div>
   </div>
 </template>
 
-<script setup {} lang="ts">
+<script setup lang="ts">
 import { defineComponent } from "vue";
 
 defineComponent({
@@ -91,14 +92,31 @@ defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.header{
-    .top-top{
-        display: flex;
-        justify-content: space-between;
-        .ul{
-          display: flex;
-           flex-wrap: wrap; 
-        }
+.header {
+  .top-top {
+    display: flex;
+    justify-content: space-between;
+    span {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
     }
+    span:nth-child(2) {
+      /* 在这里添加样式 */
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+    }
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 15%;
+    justify-content: space-between;
+    line-height: 31px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+  }
+}
+.middle {
 }
 </style>
