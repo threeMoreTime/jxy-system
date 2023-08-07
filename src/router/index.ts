@@ -19,7 +19,7 @@ const router = createRouter({
       // 子路由
       children:[
         {
-          // 信息信息
+          // 医院详细信息
           path:'detail',
           component:()=>import("@/pages/hospital/detail/index.vue")
         },

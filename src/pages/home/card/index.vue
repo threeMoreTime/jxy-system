@@ -33,7 +33,7 @@ defineProps(["hospitaInfo"]);
 let $router = useRouter();
 // 点击卡片信息的回调
 const goDetail = () =>{
-  $router.push({path:'/hospital'})
+  $router.push({path:'/hospital/register'})
 }
 onMounted(() => { });
 </script>

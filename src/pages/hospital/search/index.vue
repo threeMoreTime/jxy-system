@@ -7,9 +7,9 @@
 <script lang="ts">
 import { ref,onMounted } from 'vue'
 
-export default ({
+export default {
 name:"search"
-})
+}
 </script>
 
 <style scoped>

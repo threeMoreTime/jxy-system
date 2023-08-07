@@ -8,7 +8,7 @@
       v-model="message"
       :fetch-suggestions="showInfo"
     />
-    <el-button type="primary" size="default" :icon="Search">搜索</el-button>
+    <el-button type="primary" size="default" :icon="Search" @click="goDetail">搜索</el-button>
   </div>
   <!--:trigger-on-focus="false"取消默认触发   :fetch-suggestions 输入完信息自动回调一次 -->
 </template>
@@ -27,12 +27,14 @@ let message = ref<string>("");
 // 初始化路由
 //创建路由器对象
 let $router = useRouter();
+let $route = useRouter();
 onMounted(() => {
-  console.log($router);
+ 
 });
 // 点击回调
 const goDetail = (item: any) => {
-  $router.push({path:'/hospital',query:{item:item}})
+  console.log(item);
+  $router.push({ path: '/hospital/register', query: { item }});
 };
 // 输入信息自动回调方法
 const showInfo = async (keyword: string, cb: any) => {

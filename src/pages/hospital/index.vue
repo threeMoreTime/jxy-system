@@ -9,7 +9,7 @@
       <el-menu :default-active="$route.path" class="el-menu-vertical-demo">
         <el-menu-item
           index="/hospital/register"
-         
+          @click="changeActive('/hospital/register')"
         >
           <el-icon><icon-menu /></el-icon>
           <span>预约挂号</span>
@@ -56,6 +56,16 @@ import {
   HomeFilled,
 } from "@element-plus/icons-vue";
 import { ref, onMounted } from "vue";
+// 引入路由
+import { useRouter } from "vue-router";
+
+let $router = useRouter();
+let $route = useRouter();
+
+onMounted(() => {
+  console.log( $route.path);
+  
+})
 
 let activeNum = ref<Number>(1);
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -64,6 +74,11 @@ const handleOpen = (key: string, keyPath: string[]) => {
 const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath);
 };
+
+// 跳转子路由
+const changeActive =(path:string)=>{
+$router.push(path)
+}
 </script>
 
 
