@@ -1,57 +1,59 @@
 <template>
   <div class="hospital">
-    <!-- 左侧菜单部分 -->
+    <!-- 左侧导航区域 -->
     <div class="menu">
-      <!-- 顶部医院标题和图标 -->
       <div class="top">
         <el-icon><HomeFilled /></el-icon>
-        <p>/医院</p>
+        <span> / 医院信息</span>
       </div>
-      <!-- 左侧惨淡 -->
-      <el-row class="tac">
-        <el-col :span="4">
-          <el-menu
-            default-active="activeNum"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-          >
-            <el-menu-item index="1">
-              <el-icon><UserFilled /></el-icon>
-              <span>预约挂号</span>
-            </el-menu-item>
-            <el-menu-item index="2">
-              <el-icon><icon-menu /></el-icon>
-              <span>医院详情</span>
-            </el-menu-item>
-            <el-menu-item index="3">
-              <el-icon><document /></el-icon>
-              <span>预约须知</span>
-            </el-menu-item>
-            <el-menu-item index="4">
-              <el-icon><Remove /></el-icon>
-              <span>停诊信息</span>
-            </el-menu-item>
-            <el-menu-item index="5">
-              <el-icon><Search /></el-icon>
-              <span>查询/取消</span>
-            </el-menu-item>
-          </el-menu>
-        </el-col>
-        <el-col :span="20" :style="{background:'red'}"> 我是右侧的内容 </el-col>
-      </el-row>
+      <el-menu :default-active="$route.path" class="el-menu-vertical-demo">
+        <el-menu-item
+          index="/hospital/register"
+         
+        >
+          <el-icon><icon-menu /></el-icon>
+          <span>预约挂号</span>
+        </el-menu-item>
+        <el-menu-item index="/hospital/detail" @click="changeActive('/hospital/detail')">
+          <el-icon><document /></el-icon>
+          <span>医院详情</span>
+        </el-menu-item>
+        <el-menu-item index="/hospital/notice" @click="changeActive('/hospital/notice')">
+          <el-icon><setting /></el-icon>
+          <span>预约通知</span>
+        </el-menu-item>
+        <el-menu-item index="/hospital/close" @click="changeActive('/hospital/close')">
+          <el-icon><InfoFilled /></el-icon>
+          <span>停诊信息</span>
+        </el-menu-item>
+        <el-menu-item index="/hospital/search" @click="changeActive('/hospital/search')">
+          <el-icon><Search /></el-icon>
+          <span>查询/取消</span>
+        </el-menu-item>
+      </el-menu>
+    </div>
+    <!-- 右侧内容展示区域:路由组件展示位置 -->
+    <div class="content">
+      <!-- 子组件展示结构地方 -->
+      <router-view></router-view>
     </div>
   </div>
+      <!-- 右侧内容展示区域:路由组件展示位置 -->
+      <div class="content">
+      <!-- 子组件展示结构地方 -->
+      <router-view></router-view>
+    </div>
 </template>
 
 <script lang="ts" setup>
+//左侧菜单需要用到的图标
 import {
-  HomeFilled,
-  UserFilled,
   Document,
   Menu as IconMenu,
-  Remove,
+  Setting,
+  InfoFilled,
   Search,
+  HomeFilled,
 } from "@element-plus/icons-vue";
 import { ref, onMounted } from "vue";
 
@@ -64,52 +66,21 @@ const handleClose = (key: string, keyPath: string[]) => {
 };
 </script>
 
-<style lang="scss" scoped>
-// 主容器
+
+<style scoped lang="scss">
 .hospital {
-  // 左侧菜单部分
+  display: flex;
   .menu {
+    flex: 2;
     display: flex;
-    // 医院图标和标题
+    flex-direction: column;
+    align-items: center;
     .top {
-      display: flex;
-      p {
-        display: inline;
-      }
-    }
-
-    .tac {
-      // 左侧菜单属性
-      .el-menu {
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 10%;
-
-        // 左侧菜单标题
-        .el-menu-item:nth-child(1) {
-          font-family: Helvetica Neue, Helvetica, Arial, PingFang SC,
-            Hiragino Sans GB, Heiti SC, Microsoft YaHei, WenQuanYi Micro Hei,
-            sans-serif;
-          font-weight: bold; /* 设置为粗体 */
-          font-size: 16px;
-          color: #4490f1;
-        }
-
-        .el-menu-item {
-          margin-top: 10%;
-        }
-      }
+      color: #7f7f7f;
     }
   }
-}
-
-// 高亮样式
-.active {
-  font-family: Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB,
-    Heiti SC, Microsoft YaHei, WenQuanYi Micro Hei, sans-serif;
-  font-weight: bold; /* 设置为粗体 */
-  font-size: 16px;
-  color: #4490f1;
+  .content {
+    flex: 8;
+  }
 }
 </style>

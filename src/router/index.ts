@@ -11,10 +11,39 @@ const router = createRouter({
       component: () => import("@/pages/home/index.vue"),
       children: [],
     },
+    // 医院详情页
     {
       path: "/hospital",
       name: "hospital",
       component: () => import("@/pages/hospital/index.vue"),
+      // 子路由
+      children:[
+        {
+          // 信息信息
+          path:'detail',
+          component:()=>import("@/pages/hospital/detail/index.vue")
+        },
+        {
+          // 信息信息
+          path:'close',
+          component:()=>import("@/pages/hospital/close/index.vue")
+        },
+        {
+          // 信息信息
+          path:'notice',
+          component:()=>import("@/pages/hospital/notice/index.vue")
+        },
+        {
+          // 信息信息
+          path:'register',
+          component:()=>import("@/pages/hospital/register/index.vue")
+        },
+        {
+          // 信息信息
+          path:'search',
+          component:()=>import("@/pages/hospital/search/index.vue")
+        }
+      ]
     },
     {
       path: "/",
