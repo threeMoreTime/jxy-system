@@ -6,22 +6,31 @@ import { reqHospitalDetail } from "@/api/hospital";
 import type { HospitalDetail } from "@/api/hospital/type";
 // 引入仓库内部的数据类型
 import type {DetailState} from './interface'
+import { type } from "os";
 
 const useDetailStore = defineStore("Detail", {
   state: ():DetailState => {
     return {
       // 医院详情的数据
-      HospitalDetailInfo: ({} as HospitalDetail),
+      HospitalDetailInfo: {} as HospitalDetail
     };
   },
   actions: {
      //获取医院详情的方法
     async getHospitalInfo(hospcode: string) {
-      let result: HospitalDetail = await reqHospitalDetail(hospcode);
-      this.HospitalDetailInfo = result.data;
+      try {
+        let result: HospitalDetail = await reqHospitalDetail(hospcode);
+        if (result.code==200) {
+          this.HospitalDetailInfo = result.data;
+        }
+      } catch (error) {
+        console.error('Error fetching hospital detail:', error);
+      } 
     },
   },
-  getters: {},
+  getters: {
+
+  },
 });
 
 export default useDetailStore;

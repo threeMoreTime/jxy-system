@@ -1,4 +1,5 @@
 <template>
+  <div class="hospital-home">
   <div class="common-header">
     <div class="title-wrapper">
       <div class="hospital-title">
@@ -51,7 +52,7 @@
         <span class="space"
           >预约周期：<span class="label">{{
             detailInfo.HospitalDetailInfo.bookingRule?.cycle
-          }}</span></span
+          }}天</span></span
         >
         <span class="space"
           >放号时间：<span class="label">{{
@@ -88,6 +89,17 @@
       </div>
     </div>
   </div>
+  <div class="select-title">选择科室</div>
+  <!-- 科室菜单 -->
+  <div class="Department-menu">
+  <el-menu>
+     <el-menu-item index="4">
+          <el-icon><setting /></el-icon>
+          <span>Navigator Four</span>
+        </el-menu-item>
+      </el-menu>
+</div>
+</div>
 </template>
 
 <script lang="ts" setup>
@@ -99,7 +111,10 @@ name: "register";
 // 使用仓库
 let detailInfo = useDetailStore();
 
-onMounted(() => {});
+onMounted(() => {
+  console.log(detailInfo);
+  
+});
 </script>
 
 <style lang="scss" scoped>
@@ -175,5 +190,19 @@ onMounted(() => {});
       }
     }
   }
+}
+.select-title{
+  padding-top:40px;
+  padding-bottom:40px;
+  position:sticky;
+  letter-spacing:1px;
+  font-weight: 700;
+  color: #333;
+  font-size: 16px;
+}
+// 科室菜单
+.Department-menu{
+  height: 100%;
+  background: red;
 }
 </style>
