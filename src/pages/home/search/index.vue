@@ -33,8 +33,9 @@ onMounted(() => {
 });
 // 点击回调
 const goDetail = (item: any) => {
-  console.log(item);
-  $router.push({ path: '/hospital/register', query: { item }});
+  console.log(item.hoscode);
+    //点击推荐项目进入医院详情页,将来需要携带query参数(医院的编码)
+    $router.push({ path: "/hospital/register",query:{hoscode:item.hoscode}});
 };
 // 输入信息自动回调方法
 const showInfo = async (keyword: string, cb: any) => {

@@ -6,6 +6,8 @@ import App from "./App.vue";
 import "@/style/reset.scss";
 // 引入路由并使用
 import router from "@/router/index";
+// 引入pinia仓库
+import  pinia  from "@/store";
 // 使用createApp创建实例对象
 const app = createApp(App);
 // 引入全局组件header和floor
@@ -33,6 +35,7 @@ app.component("Floor", Floor);
 // 使用插件
 app.use(ElementPlus);
 app.use(router);
+app.use(pinia);
 
 // 挂载到挂载点上
 app.mount("#app");

@@ -38,11 +38,6 @@
       <router-view></router-view>
     </div>
   </div>
-      <!-- 右侧内容展示区域:路由组件展示位置 -->
-      <div class="content">
-      <!-- 子组件展示结构地方 -->
-      <router-view></router-view>
-    </div>
 </template>
 
 <script lang="ts" setup>
@@ -57,15 +52,20 @@ import {
 } from "@element-plus/icons-vue";
 import { ref, onMounted } from "vue";
 // 引入路由
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
+// 引入仓库
+import useDetailStore from '@/store/moudues/hospitalDetail';
 
+// 获取路由
 let $router = useRouter();
-let $route = useRouter();
-
+// 获取路由信息
+let $route = useRoute();
+// 获取仓库信息
+let detailInfo = useDetailStore();
 onMounted(() => {
-  console.log( $route.path);
-  
-})
+  // 挂载获取医院详细信息
+  detailInfo.getHospitalInfo($route.query.hoscode);
+});
 
 let activeNum = ref<Number>(1);
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -99,3 +99,4 @@ $router.push(path)
   }
 }
 </style>
+@/store/moudues/hospitalDetail
